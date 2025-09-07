@@ -1,0 +1,139 @@
+:root{
+  --bg: #0b0d10;
+  --panel: #11151a;
+  --card: #171c22;
+  --text: #e7ecf3;
+  --muted: #9fb2c7;
+  --brand: #6aa6ff;
+  --accent-violet: #8b5cf6;
+  --accent-purple: #a855f7;
+  --accent-green: #22c55e;
+  --violetA: rgba(139,92,246,.14);
+  --greenA: rgba(34,197,94,.10);
+  --purpleA: rgba(168,85,247,.12);
+  --brandGradient: linear-gradient(135deg, var(--accent-violet), var(--accent-green) 60%, var(--accent-purple));
+  --ring: #8ac0ff55;
+  --border: #223042;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f7f9fc; --panel:#ffffff; --card:#ffffff; --text:#132133; --muted:#5a6a7d; --brand:#2f6fff; --ring:#2f6fff33; --border:#e4e9f1;
+    --accent-violet:#7c3aed; --accent-purple:#9333ea; --accent-green:#16a34a;
+    --violetA: rgba(124,58,237,.12); --greenA: rgba(22,163,74,.10); --purpleA: rgba(147,51,234,.10);
+    --brandGradient: linear-gradient(135deg, var(--accent-violet), var(--accent-green) 60%, var(--accent-purple));
+  }
+}
+
+:root.theme-dark{
+  --bg: #0b0d10; --panel:#11151a; --card:#171c22; --text:#e7ecf3; --muted:#9fb2c7; --brand:#6aa6ff; --ring:#8ac0ff55; --border:#223042;
+  --accent-violet:#8b5cf6; --accent-purple:#a855f7; --accent-green:#22c55e; --violetA: rgba(139,92,246,.14); --greenA: rgba(34,197,94,.10); --purpleA: rgba(168,85,247,.12);
+}
+:root.theme-light{
+  --bg:#f7f9fc; --panel:#ffffff; --card:#ffffff; --text:#132133; --muted:#5a6a7d; --brand:#2f6fff; --ring:#2f6fff33; --border:#e4e9f1;
+  --accent-violet:#7c3aed; --accent-purple:#9333ea; --accent-green:#16a34a; --violetA: rgba(124,58,237,.12); --greenA: rgba(22,163,74,.10); --purpleA: rgba(147,51,234,.10);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font: 14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  background:var(--bg);
+  color:var(--text);
+  min-height:100svh; display:flex; flex-direction:column;
+}
+
+.app-header{
+  position:sticky; top:0; z-index:20;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; padding: .75rem 1rem; border-bottom:1px solid var(--border);
+  background: linear-gradient(180deg, var(--panel) 0%, color-mix(in oklab, var(--panel), transparent 6%) 100%);
+  backdrop-filter: saturate(1.2) blur(8px);
+  overflow:visible;
+}
+.app-header::after{
+  content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; 
+  background: var(--brandGradient); opacity:.6; pointer-events:none;
+}
+.brand{display:flex; align-items:center; gap:.6rem}
+.brand .logo{font-size:1.25rem}
+.brand h1{font-size:1.05rem; margin:0; letter-spacing:.2px}
+.brand .net{font-weight:700; margin-left:.3rem; line-height:1;}
+.brand .net.ok{color:#22c55e}
+.brand .net.off{color:#f59e0b}
+
+.tools{display:flex; align-items:center; gap:.6rem}
+
+.search{position:relative; display:inline-flex; align-items:center}
+.search input{
+  width:min(52vw, 380px);
+  padding:.56rem .8rem .56rem 2.2rem; border-radius:.6rem; border:1px solid var(--border);
+  background: var(--panel);
+  color:var(--text);
+  outline:none;
+}
+.search .icon{position:absolute; left:.55rem; width:18px; height:18px; fill:var(--muted)}
+
+.segmented{display:inline-grid; grid-auto-flow:column; align-items:center; border:1px solid var(--border); border-radius:.6rem; overflow:hidden}
+.segmented input{position:absolute; opacity:0; pointer-events:none}
+.segmented label{padding:.5rem .65rem; cursor:pointer; user-select:none; background:var(--panel); color:var(--muted)}
+.segmented input:checked + label{background:var(--brandGradient); color:white}
+
+.ghost{background:transparent; color:var(--text); border:1px solid var(--border); border-radius:.6rem; padding:.45rem .6rem; cursor:pointer}
+.ghost.active{background:var(--brandGradient); border-color:transparent; color:#fff}
+
+.app-main{padding:1rem; flex:1}
+
+.grid{display:grid; grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); gap:1rem}
+
+.card{background:var(--card); border:1px solid var(--border); border-radius:.9rem; overflow:hidden; cursor:pointer; position:relative; box-shadow: 0 1px 0 rgba(0,0,0,.05)}
+.card:focus{outline:2px solid var(--ring); outline-offset:2px}
+.card .bar{display:flex; align-items:center; justify-content:space-between; gap:.5rem; padding:.45rem .6rem .65rem}
+.card .fav{border:1px solid var(--border); background:var(--panel); color:var(--muted); border-radius:.45rem; padding:.2rem .45rem; cursor:pointer}
+.card .fav.active{color:#ffb703; border-color:#ffb70355; background: #ffb7031a}
+.card .thumb{aspect-ratio:1/1; display:grid; place-items:center; background:
+  linear-gradient(180deg, #00000011, #00000000),
+  linear-gradient(135deg, var(--violetA), var(--greenA) 60%, var(--purpleA));
+}
+.card img{width:100%; height:100%; object-fit:contain; filter: drop-shadow(0 4px 12px #0006)}
+.card .title{margin:0; font-size:.95rem; font-weight:600; letter-spacing:.2px}
+.card:focus{box-shadow: 0 0 0 3px rgba(139,92,246,.25);}
+
+.detail{position:fixed; inset:0; display:grid; place-items:stretch; background:color-mix(in oklab, var(--bg), transparent 20%); backdrop-filter: blur(8px); opacity:0; pointer-events:none; transition:opacity .2s ease}
+.detail[open], .detail.active{opacity:1; pointer-events:auto}
+.detail .detail-content{margin:auto; width:min(100%, 1000px); display:grid; grid-template-columns: 1fr 1fr; gap:1rem; background:var(--panel); border:1px solid var(--border); border-radius:1rem; padding:1rem}
+.detail .media{display:grid; place-items:center; background:var(--card); border:1px solid var(--border); border-radius:.75rem; min-height:360px}
+.detail .media{position:relative}
+.detail .media .close{position:absolute; top:8px; right:8px; z-index:3; border:1px solid var(--border); background:var(--panel); color:var(--text); border-radius:.45rem; padding:.25rem .5rem; cursor:pointer}
+.detail .media img{max-width:100%; height:auto; object-fit:contain}
+.detail .meta{display:flex; flex-direction:column; gap:.75rem}
+.detail .meta .fav{align-self:flex-start; border:1px solid var(--border); background:var(--card); color:var(--muted); border-radius:.5rem; padding:.35rem .6rem; cursor:pointer}
+.detail .meta .fav.active{color:#ffb703; border-color:#ffb70355; background:#ffb7031a}
+.detail .props{display:grid; grid-template-columns:auto 1fr; gap:.25rem .75rem; margin:0}
+.detail .props dt{opacity:.7}
+.detail .variants{display:flex; flex-wrap:wrap; gap:.5rem}
+.detail .variants a{display:inline-flex; align-items:center; gap:.4rem; border:1px solid var(--border); background:var(--card); color:var(--text); text-decoration:none; padding:.4rem .55rem; border-radius:.5rem}
+.detail .close{position:absolute; top:10px; right:10px; border:1px solid var(--border); background:var(--panel); color:var(--text); border-radius:.5rem; padding:.3rem .5rem; cursor:pointer}
+
+/* Dev notes */
+.dev-notes{margin-top:.75rem; border:1px dashed var(--border); border-radius:.6rem; padding:.75rem; background:color-mix(in oklab, var(--panel), transparent 10%)}
+.dev-notes h3{margin:.2rem 0 .5rem; font-size:1rem}
+.dev-notes ol{margin:.25rem 0 .75rem; padding-left:1.2rem}
+.dev-notes .code{position:relative; margin:.5rem 0}
+.dev-notes pre{margin:0; padding:.6rem .7rem; background:var(--card); border:1px solid var(--border); border-radius:.5rem; overflow:auto}
+.dev-notes .copy{position:absolute; top:.35rem; right:.35rem; border:1px solid var(--border); background:var(--panel); color:var(--text); border-radius:.4rem; padding:.2rem .45rem; cursor:pointer}
+
+@media (max-width: 900px){
+  .detail .detail-content{grid-template-columns:1fr}
+}
+
+.skeleton{background: linear-gradient(90deg, #ffffff03, #ffffff0e, #ffffff03); background-size:200% 100%; animation: shimmer 1.3s infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.empty{opacity:.65; text-align:center; grid-column:1/-1; padding:3rem 1rem}
+
+.app-footer{position:relative; z-index:10; display:flex; align-items:center; justify-content:center; gap:.5rem; padding:.7rem 1rem; border-top:1px solid var(--border); background: var(--panel); color: var(--muted)}
+.app-footer a{color:inherit; text-decoration:underline}
+.app-footer::before{content:""; position:absolute; left:0; right:0; top:-1px; height:2px; background: linear-gradient(135deg, #8b5cf6, #22c55e 60%, #a855f7); opacity:.5}
