@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tekken 8 rooster dev tool</title>
+    <meta name="description" content="Responsive album-style grid and details view powered by rooster.json" />
+    <meta name="theme-color" content="#11151a" />
+    <link rel="preconnect" href="https://images.start.gg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">🗂️</span>
+        <h1>Tekken 8 rooster dev tool</h1>
+        <span id="netStatus" class="net ok" title="Network status">•</span>
+      </div>
+      <div class="tools">
+        <label class="search">
+          <input id="search" type="search" placeholder="Search…" autocomplete="off" />
+          <svg viewBox="0 0 24 24" class="icon"><path d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-4.23 6.5 6.5 0 1 0-6.5 6.5 6.471 6.471 0 0 0 4.23-1.57l.27.28v.79L20 21.5 21.5 20l-6-6zM5 9.5C5 7.01 7.01 5 9.5 5S14 7.01 14 9.5 11.99 14 9.5 14 5 11.99 5 9.5z"/></svg>
+        </label>
+
+        <div class="segmented" title="Choose image style">
+          <input type="radio" id="imgType-icon" name="imgType" value="icon" checked />
+          <label for="imgType-icon">Icon</label>
+          <input type="radio" id="imgType-stock" name="imgType" value="stockIcon" />
+          <label for="imgType-stock">Stock</label>
+        </div>
+
+        <button id="favFilter" class="ghost" title="Show favorites only">★ Favs</button>
+        <button id="btnOffline" class="ghost" title="Cache visible items for offline">⬇ Offline</button>
+        <button id="themeToggle" class="ghost" title="Toggle theme">🌗</button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section id="grid" class="grid" aria-live="polite" aria-busy="true"></section>
+    </main>
+
+    <footer class="app-footer">Made with 💕 by jet'aime - <a href="https://github.com/0xABADBABE-ops" target="_blank" rel="noopener noreferrer">0xABADBABE</a></footer>
+
+    <aside id="detail" class="detail" aria-hidden="true" role="dialog" aria-labelledby="detail-title">
+      <button class="close" id="closeDetail" aria-label="Close details">✕</button>
+      <div class="detail-content">
+        <div class="media">
+          <button class="close in-media" id="closeDetailInMedia" aria-label="Close preview">✕</button>
+          <img id="detail-img" alt="" />
+        </div>
+        <div class="meta">
+          <h2 id="detail-title"></h2>
+          <dl class="props">
+            <div><dt>ID</dt><dd id="detail-id"></dd></div>
+            <div><dt>Game</dt><dd id="detail-game"></dd></div>
+          </dl>
+          <div id="detail-variants" class="variants"></div>
+          <section id="dev-notes" class="dev-notes"></section>
+        </div>
+      </div>
+    </aside>
+
+    <template id="card-tpl">
+      <article class="card" tabindex="0">
+        <div class="thumb">
+          <img loading="lazy" decoding="async" alt="" />
+        </div>
+        <div class="bar">
+          <h3 class="title"></h3>
+          <button class="fav" title="Toggle favorite" aria-label="Toggle favorite">★</button>
+        </div>
+      </article>
+    </template>
+
+    <script type="module" src="script.js"></script>
+  </body>
+  </html>
