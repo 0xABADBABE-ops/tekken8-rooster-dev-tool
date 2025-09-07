@@ -1,0 +1,10 @@
+{
+  "name": "Tekken 8 rooster dev tool",
+  "short_name": "T8 Rooster",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0b0d10",
+  "theme_color": "#11151a",
+  "description": "Album-style grid and details view powered by rooster.json",
+  "icons": []
+}
