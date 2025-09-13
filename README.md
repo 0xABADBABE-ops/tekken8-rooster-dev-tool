@@ -1,6 +1,7 @@
 Tekken 8 rooster dev tool
 =================================
 (_yes 'rooster', it's not a typo._)
+
 Responsive, modern album-style grid that loads `rooster.json` (characters with image variants) and provides a details view, favorites, search, and offline support.
 
 Features
